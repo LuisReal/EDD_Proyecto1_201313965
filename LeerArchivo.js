@@ -52,13 +52,10 @@ class Archivo{
                     //console.log("el nombre del artista es: "+encabezado.artista.name)
                     if(encabezado == null){
                         console.log("No existe el artista");
-                    }else{
-                         
-                        encabezado.lista_canciones.insertarCancion(new Cancion(cancion.artist, cancion.name , cancion.duration, cancion.gender));
-                            
+                    }else{             
+                        encabezado.lista_canciones.insertarCancion(new Cancion(cancion.artist, cancion.name , cancion.duration, cancion.gender)); 
                     }
-                    
-                    
+                     
                 });
                 this.lista_artista.mostrarTodo();
                 //lista_artista.printLista();
