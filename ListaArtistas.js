@@ -21,7 +21,7 @@ class Cancion{
 class NodoArtista{
     constructor(artista){
         this.artista = artista;
-        this.acceso = null;
+        this.lista_canciones = new ListaCancion();
         this.abajo = null;
     }
 }
@@ -79,8 +79,8 @@ class ListaArtista{
         while(temp1 != null){
             lista += "artista: "+temp1.artista.name+"->";
             
-            if(temp1.acceso != null){
-                var temp2 = temp1.acceso;
+            if(temp1.lista_canciones.primero != null){
+                var temp2 = temp1.lista_canciones.primero;
                 while(temp2 != null){
                     
                     lista +="artista: "+temp2.cancion.artist+" cancion: "+temp2.cancion.name+"->";
@@ -123,6 +123,7 @@ class ListaCancion{
         }
     }
 }
+/*
 
 var lista_artista = new ListaArtista();
 lista_artista.insertarArtista(new Artista("Boy George", 30, "England"));
@@ -148,12 +149,12 @@ if(encabezado == null){
         encabezado.acceso = lista_cancion.primero;
         
     }else{
-        console.log("insertando cancion seguidas")
+        
         lista_cancion.insertarCancion(new Cancion("Ricardo Arjona", "Mujeres", 5, "pop"));
     }
     
 
-}
+}*/
 
 //lista_artista.mostrarTodo();
 
