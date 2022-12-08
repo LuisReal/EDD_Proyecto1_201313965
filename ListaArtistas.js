@@ -155,7 +155,9 @@ if(encabezado == null){
 
 }
 
-lista_artista.mostrarTodo();
+//lista_artista.mostrarTodo();
+
+
 
 /*
 lista_cancion.insertarCancion(new Cancion("Ricardo Arjona", "Fuiste tu", 3, "pop"));

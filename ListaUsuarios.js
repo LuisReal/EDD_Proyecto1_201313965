@@ -44,9 +44,10 @@ class Lista{
     }
 }
 
+/*
 var lista = new Lista();
 
 lista.insertar(new Usuario("241597864321", "luis", "luis123",123, 78812219, false));
 lista.insertar(new Usuario("555164870132", "karla", "karla123",124, 4567891, false));
 lista.insertar(new Usuario("487135791000", "chelsea", "chelsea123",125, 487956511, false));
-lista.print();
+lista.print();*/
