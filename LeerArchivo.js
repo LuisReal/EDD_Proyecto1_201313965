@@ -61,10 +61,22 @@ class Archivo{
                 //lista_artista.printLista();
             });
     }
+
+    pruebas(){
+        var mes1 = "December";
+        var mes2 = "February";
+
+        if(mes1 < mes2){
+            console.log("mes1 es menor "+mes1);
+        }else{
+            console.log("mes2 es menor "+mes2);
+        }
+    }
 }
 
 var archivo = new Archivo();
-
+/*
 archivo.cargarUsuarios();
 archivo.cargarArtistas();
-archivo.cargarCanciones();
+archivo.cargarCanciones();*/
+archivo.pruebas();

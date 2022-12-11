@@ -1,11 +1,24 @@
+class NodoInterno{
+    constructor(x , y ){
+        
+        this.x = x;
+        this.y = y;
+        this.arriba = null;
+        this.abajo = null;
+        this.derecha = null;
+        this.izquierda = null;
+    }
+
+}
 class Matriz{
     constructor(capa){
         this.capa = capa;
         this.filas = new ListaEncabezado("LISTAS");
         this.columnas = new ListaEncabezado("COLUMNAS");
     }
-    
+
     insertar(nodoInterno){
+        // x = mes     y= dia
         var encabezadoX = this.filas.getEncabezado(nodoInterno.x);
         var encabezadoY = this.columnas.getEncabezado(nodoInterno.y);
 
@@ -17,6 +30,7 @@ class Matriz{
             encabezadoY = NodoEncabezado(nodoInterno.y);
             this.columnas.insertarEncabezado(encabezadoY);
         }
+        // x = mes     y= dia
         if(encabezadoX.acceso == null){
             encabezadoX.acceso = nodoInterno;
         }
@@ -27,7 +41,7 @@ class Matriz{
                 encabezadoX.acceso.izquierda = nodoInterno;
                 encabezadoX.acceso = nodoInterno;
             }
-            else{
+            else{// x = mes     y= dia
                 var aux = encabezadoX.acceso;
                 while(aux != null){
                     if(nodoInterno.y < aux.y){
@@ -51,6 +65,7 @@ class Matriz{
             }    
 
         }
+        // x = mes     y= dia
         if(encabezadoY.acceso == null){
             encabezadoY.acceso = nodoInterno;
         }
@@ -61,7 +76,7 @@ class Matriz{
                 encabezadoY.acceso.arriba = nodoInterno;
                 encabezadoY.acceso = nodoInterno;
             }
-            else{
+            else{// x = mes     y= dia
                 var aux2 = encabezadoY.acceso;
                 while(aux2 != null){
                     if(nodoInterno.x < aux2.x){
@@ -83,6 +98,32 @@ class Matriz{
                     }    
                 }
             }
+        }
+    }
+
+    getNodo(mes, dia){// x = mes     y= dia
+        var aux = this.filas.primero;
+        var aux2 = aux.acceso;
+        while(aux != null){
+            
+            while(aux2.x != mes  || aux2.y != dia){
+                if(aux2.derecha != null){
+                    aux2 = aux2.derecha;
+                }
+                else{
+                    break;
+                }
+            }
+            if(aux2.x == mes && aux2.y == dia){
+                return aux2;
+            }
+            else{     
+                var aux = aux.siguiente;
+                if(aux != null){
+                    aux2 = aux.acceso;
+                }
+            }
+                    
         }
     }
 }

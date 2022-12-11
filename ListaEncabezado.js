@@ -1,6 +1,6 @@
 class NodoEncabezado{
     constructor(id){
-        this.id = id;
+        this.id = id; // id = nodoinerno.x   , x = fila
         this.siguiente = null;
         this.anterior = null;
         this.acceso = null;  //APUNTADOR A NODOS INTERNOS
