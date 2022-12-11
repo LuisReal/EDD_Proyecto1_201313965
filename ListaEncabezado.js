@@ -25,12 +25,12 @@ class ListaEncabezado{
         else{
 
             //INSERTAR EN ORDEN (IMPORTANTE)
-            if(nuevo.id < this.primero.id){
+            if(nuevo.id < this.primero.id){ // id = x (fila)
                 nuevo.siguiente = this.primero;
                 this.primero.anterior = nuevo;
                 this.primero = nuevo;
             }
-            else if(nuevo.id > this.ultimo.id){
+            else if(nuevo.id > this.ultimo.id){ // id = x (fila)
                 this.ultimo.siguiente = nuevo;
                 nuevo.anterior = this.ultimo;
                 this.ultimo = nuevo;
@@ -39,14 +39,14 @@ class ListaEncabezado{
                 var aux = this.primero;
 
                 while(aux != null){
-                    if(nuevo.id < aux.id){
+                    if(nuevo.id < aux.id){ // id = x (fila)
                         nuevo.siguiente = aux;
                         nuevo.anterior = aux.anterior;
                         aux.anterior.siguiente = nuevo;
                         aux.anterior = nuevo;
                         break;
                     }
-                    else if(nuevo.id > aux.id){
+                    else if(nuevo.id > aux.id){ // id = x (fila)
                         aux = aux.siguiente;
                     }
                     else{

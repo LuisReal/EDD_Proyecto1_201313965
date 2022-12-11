@@ -62,16 +62,7 @@ class Archivo{
             });
     }
 
-    pruebas(){
-        var mes1 = "December";
-        var mes2 = "February";
-
-        if(mes1 < mes2){
-            console.log("mes1 es menor "+mes1);
-        }else{
-            console.log("mes2 es menor "+mes2);
-        }
-    }
+    
 }
 
 var archivo = new Archivo();
@@ -79,4 +70,3 @@ var archivo = new Archivo();
 archivo.cargarUsuarios();
 archivo.cargarArtistas();
 archivo.cargarCanciones();*/
-archivo.pruebas();

@@ -1,0 +1,28 @@
+var btn = document.getElementById('btn');
+
+
+function getFecha(){
+    let fecha1 = document.getElementById('Fecha1').value;
+    let fecha2 = document.getElementById('Fecha2').value;
+    //let dato = "2022-06-15";
+    let date1 = new Date(fecha1);
+    let date2 = new Date(fecha2);
+    
+    
+    
+    if(date1.getMonth() < date2.getMonth()){
+        let mes1 = date1.toLocaleString('default', {month:'long'});
+        console.log("fecha1 es menor "+ mes1);
+    }else{
+        let mes2 = date2.toLocaleString('default', {month:'long'});
+        console.log("fecha2 es menor "+ mes2);
+    }
+    
+
+}
+
+btn.addEventListener('click', getFecha);
+
+/*<script type="text/javascript" src="ListaUsuarios.js"></script>
+    <script type="text/javascript" src="ListaArtistas.js"></script>
+    <script type="text/javascript" src="LeerArchivo.js"></script>*/
