@@ -41,4 +41,16 @@ class ListaCircularDoble{
         this.ultimo.siguiente = this.primero;
         
     }
+
+    mostrarLista(){
+        var temp = this.primero;
+        while(temp != null){
+            console.log("artista: "+temp.cancion.artist+" cancion: "+temp.cancion.name);
+            
+            temp = temp.siguiente;
+            if(temp == this.primero){
+                break;
+            }
+        }
+    }
 }
