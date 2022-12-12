@@ -1,4 +1,4 @@
-/*class Usuario{
+class Usuario{
     constructor(dpi, name, username, password, phone, admin){
         this.dpi = dpi;
         this.name = name;
@@ -7,7 +7,7 @@
         this.phone = phone;
         this.admin = admin;
     }
-}*/
+}
 
 class NodoPila{
     constructor(amigo){
@@ -25,18 +25,18 @@ class Pila{
     }
 
     apilar(nuevoNodo){
-        
+        var new_nodo = new NodoPila(nuevoNodo);
         if(this.primero.amigo == null){
-            this.primero = nuevoNodo;
-            this.ultimo = nuevoNodo;
+            this.primero = new_nodo;
+            this.ultimo = new_nodo;
         }
         else if(this.primero.siguiente == null){
-            this.primero.siguiente = nuevoNodo;
-            this.ultimo = nuevoNodo;
+            this.primero.siguiente = new_nodo;
+            this.ultimo = new_nodo;
         }
         else{
-            this.ultimo.siguiente = nuevoNodo;
-            this.ultimo = nuevoNodo;
+            this.ultimo.siguiente = new_nodo;
+            this.ultimo = new_nodo;
         }
     }
 
