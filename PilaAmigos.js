@@ -57,5 +57,26 @@ class Pila{
             nodoPenultimo.siguiente = null;
         }
     }
+
+    recorrerPila(){
+        var nodoAux = this.primero;
+        
+        var cadena = '';
+        while(True){
+            if(nodoAux != null){
+                cadena += '(' + nodoAux.amigo.name + ') -> ';
+                if(nodoAux.siguiente != null){
+                    nodoAux = nodoAux.siguiente;
+                }
+                else{
+                    break;
+                }
+            }
+            else{
+                break;
+            }
+        }
+        console.log(cadena);
+    }
         
 }
