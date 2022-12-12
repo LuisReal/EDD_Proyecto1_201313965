@@ -39,4 +39,23 @@ class Pila{
             this.ultimo = nuevoNodo;
         }
     }
+
+    desapilar(){
+        
+        if(this.primero.siguiente == null){
+            this.primero = null;
+        }
+        else{
+            var nodoaux = this.primero;
+            var nodoPenultimo = nodoaux;
+            
+            while(nodoaux.siguiente != null){
+                nodoPenultimo = nodoaux;
+                nodoaux = nodoaux.siguiente;
+            }
+            this.ultimo = nodoPenultimo;
+            nodoPenultimo.siguiente = null;
+        }
+    }
+        
 }
