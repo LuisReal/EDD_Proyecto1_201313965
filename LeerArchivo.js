@@ -1,72 +1,46 @@
-class Archivo{
+
+lista_usuarios = new Lista();
+lista_artista = new ListaArtista();
+
+/*
+function readFileUsers(e) { 
+    var file = e.target.files[0];
+    var nombre = file.name;
+    console.log("nombre del archivo: "+nombre);
+    if (!file) { return; } 
+    var reader = new FileReader(); 
+    reader.onload = function(e) {
+         
+        var contents = e.target.result; // guarda un string
+        
+        var obj = JSON.parse(contents);
+        //dpi, name, username, password, phone, admin
+        if(nombre =="users.json"){
+            for(a in obj){
+                lista_usuarios.insertar(new Usuario(obj[a].dpi, obj[a].name, obj[a].username, obj[a].password, obj[a].admin) );
+            }
     
-
-    constructor(){
-        this.lista_usuarios = new Lista();
-        this.lista_artista = new ListaArtista();
+            lista_usuarios.print();
+        }
         
-    }
+
+    }; 
+    reader.readAsText(file);
     
-    cargarUsuarios(){
-        
-        fetch('usuarios.json')
-            
-            .then(respuesta => respuesta.json())
-            .then(usuarios =>{
-                usuarios.forEach(usuario=>{
-                    
-                    this.lista_usuarios.insertar(new Usuario(usuario.dpi, usuario.name, usuario.username, usuario.password, usuario.phone, usuario.admin));
-                    
-                });
-                //lista_usuarios.print();
-            });
-        
-            
-    }
+} 
+document.getElementById('file-input').addEventListener('change', readFileUsers, false);*/
 
-    cargarArtistas(){
-        
-        fetch('artistas.json')
-            
-            .then(respuesta => respuesta.json())
-            .then(artistas =>{
-                artistas.forEach(artista=>{
-                    
-                    this.lista_artista.insertarArtista(new Artista(artista.name, artista.age, artista.country));
-                    
-                });
-                //lista_artista.printLista();
-            });
-    }
 
-    cargarCanciones(){ // esto crea la lista de listas, que usa a los artistas como cabecera y como lista a las canciones
-        
-        fetch('canciones.json')
-            
-            .then(respuesta => respuesta.json())
-            .then(canciones =>{
-                canciones.forEach(cancion=>{
-                    var artista = cancion.artist;
+function Users(){
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
 
-                    var encabezado =this.lista_artista.getEncabezado(artista);
-                    //console.log("el nombre del artista es: "+encabezado.artista.name)
-                    if(encabezado == null){
-                        console.log("No existe el artista");
-                    }else{             
-                        encabezado.lista_canciones.insertarCancion(new Cancion(cancion.artist, cancion.name , cancion.duration, cancion.gender)); 
-                    }
-                     
-                });
-                this.lista_artista.mostrarTodo();
-                //lista_artista.printLista();
-            });
-    }
-
-    
+    console.log("username: "+username + " password: "+password);
 }
 
-var archivo = new Archivo();
-/*
-archivo.cargarUsuarios();
-archivo.cargarArtistas();
-archivo.cargarCanciones();*/
+//var formulario = document.getElementById('form');
+
+document.getElementById('enviar').addEventListener('click', Users, false);
+//document.getElementById('enviar').addEventListener('click', Users, false);
+
+

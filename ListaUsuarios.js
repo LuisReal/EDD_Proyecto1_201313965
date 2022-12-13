@@ -37,8 +37,9 @@ class Lista{
 
     print(){
         var temp = this.primero;
+        console.log("imprimiendo lista de usuarios")
         while(temp != null){
-            console.log(temp.usuario.name);
+            console.log("nombre: "+temp.usuario.name, " dpi: "+temp.usuario.dpi);
             temp = temp.siguiente;
         }
     }

@@ -1,6 +1,6 @@
 class NodoInterno{
-    constructor(x , y ){
-        
+    constructor(x , y, valor ){
+        this.valor = valor;
         this.x = x;
         this.y = y;
         this.arriba = null;
@@ -27,7 +27,7 @@ class Matriz{
             this.filas.insertarEncabezado(encabezadoX);
         }
         if(encabezadoY == null){
-            encabezadoY = NodoEncabezado(nodoInterno.y);
+            encabezadoY = new NodoEncabezado(nodoInterno.y);
             this.columnas.insertarEncabezado(encabezadoY);
         }
         // x = mes     y= dia

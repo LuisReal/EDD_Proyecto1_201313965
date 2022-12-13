@@ -26,7 +26,7 @@ class ListaCircularDoble{
     insertar(cancion){
         var nuevo_nodo = new NodoCircular(cancion);
         
-        if(this.primero == NULL){
+        if(this.primero == null){
         
             this.primero = this.ultimo = nuevo_nodo;
         }

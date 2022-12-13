@@ -1,3 +1,4 @@
+/*
 var btn = document.getElementById('btn');
 
 
@@ -8,7 +9,11 @@ function getFecha(){
     let date1 = new Date(fecha1);
     let date2 = new Date(fecha2);
     
-    
+    var matriz = new Matriz("Raiz");
+    console.log("mes: "+date1.getMonth() + " dia: "+date1.getDate());
+    matriz.insertar(new NodoInterno(date1.getMonth(), date1.getDate(), "cancion1" ));
+    var nodo = matriz.getNodo(date1.getMonth(), date1.getDate());
+    console.log("mes: "+nodo.x);
     
     if(date1.getMonth() < date2.getMonth()){
         let mes1 = date1.toLocaleString('default', {month:'long'});
@@ -18,11 +23,27 @@ function getFecha(){
         console.log("fecha2 es menor "+ mes2);
     }
     
-
 }
 
-btn.addEventListener('click', getFecha);
+btn.addEventListener('click', getFecha);*/
 
-/*<script type="text/javascript" src="ListaUsuarios.js"></script>
-    <script type="text/javascript" src="ListaArtistas.js"></script>
-    <script type="text/javascript" src="LeerArchivo.js"></script>*/
+/*
+function readFile(e) { 
+    var file = e.target.files[0]; 
+    if (!file) { return; } 
+    var reader = new FileReader(); 
+    reader.onload = function(e) {
+         
+        var contents = e.target.result;
+        
+        var obj = JSON.parse(contents);
+    
+        for(a in obj){
+            console.log(obj[a].name);
+        }
+
+    }; 
+    reader.readAsText(file);
+    
+} 
+document.getElementById('file-input').addEventListener('change', readFile, false);*/

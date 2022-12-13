@@ -66,7 +66,7 @@ class ListaEncabezado{
     }
     
     getEncabezado(id){
-        aux = this.primero;
+        var aux = this.primero;
         while(aux != null){
             if(id == aux.id){
                 return aux;

@@ -1,4 +1,4 @@
-class Usuario{
+/*class Usuario{
     constructor(dpi, name, username, password, phone, admin){
         this.dpi = dpi;
         this.name = name;
@@ -7,7 +7,7 @@ class Usuario{
         this.phone = phone;
         this.admin = admin;
     }
-}
+}*/
 
 class NodoCola{
     constructor(usuario){
@@ -76,6 +76,7 @@ class Cola{
 }
 
 /*dpi, name, username, password, phone, admin*/
+/*
 var cola = new Cola();
 
 cola.insertar(new Usuario(2418456782101, "LuisReal","luis526",123,57594210, false));
@@ -84,4 +85,4 @@ cola.insertar(new Usuario(487135791000, "chelsea", "chelsea123",125, 487956511, 
 
 cola.recorrerCola();
 cola.desencolar();
-cola.recorrerCola();
+cola.recorrerCola();*/

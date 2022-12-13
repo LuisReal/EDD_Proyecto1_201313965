@@ -1,4 +1,4 @@
-class Usuario{
+/*class Usuario{
     constructor(dpi, name, username, password, phone, admin){
         this.dpi = dpi;
         this.name = name;
@@ -7,7 +7,7 @@ class Usuario{
         this.phone = phone;
         this.admin = admin;
     }
-}
+}*/
 
 class NodoPila{
     constructor(amigo){
