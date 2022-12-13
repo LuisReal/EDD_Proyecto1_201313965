@@ -34,8 +34,10 @@ document.getElementById('file-input').addEventListener('change', readFileUsers, 
 function Users(){
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-
+    document.getElementById('username').value = "";
+    document.getElementById('password').value ="";
     console.log("username: "+username + " password: "+password);
+    
 }
 
 //var formulario = document.getElementById('form');
