@@ -20,3 +20,27 @@ body{
     text-align: center;
     vertical-align: middle;
 }
+
+.graficas-label{
+    background:linear-gradient(to right, #ECF0F1, #CACFD2 , #95A5A6 );
+    font-size: 20px;
+    text-align: center;
+    padding-top: 15px;
+    height: 50px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#fila-labels{
+    background:linear-gradient(to right, #ABEBC6 , #58D68D, #239B56  );
+}
+
+.cargar-archivo{
+    background:linear-gradient(to right, #ECF0F1, #CACFD2 , #95A5A6 );
+    font-size: 20px;
+    text-align: center;
+    padding-top: 5px;
+    height: 40px;
+    border-radius: 5px;
+}

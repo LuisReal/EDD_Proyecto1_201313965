@@ -15,7 +15,7 @@
 
     <h1 style="text-align:center">Bienvenido a Muster Cloud</h1>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar-inicio">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,11 +42,11 @@
                 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Username" autofocus>
+                    <input type="text" class="form-control" id="username-login" placeholder="Username" autofocus>
                 </div>
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" autofocus>
+                    <input type="password" class="form-control" id="password-login" placeholder="Password" autofocus>
                 </div>
                 
                 <div class="mb-3">
@@ -54,7 +54,7 @@
                     <input type="radio" value="administrador" />Administrador<br/>
                 </div>
                 <div class="d-grid gap-2"><!--Coloca cada boton a lo largo-->
-                    <button class="btn btn-success" id="enviar">SIGN IN</button>
+                    <button class="btn btn-success" id="enviar-login">SIGN IN</button>
                     
                 </div>
                 <div class="mb-3 py-4">
@@ -69,7 +69,7 @@
     </div>
 
     <div class="container " id="div-registrar" style="display: none;">
-            
+        
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4 "></div>
             
@@ -78,26 +78,26 @@
                 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Username" autofocus>
+                    <input type="text" class="form-control" id="username-registrar" placeholder="Username" autofocus>
                 </div>
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre Completo</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nombre Completo" autofocus>
+                    <input type="text" class="form-control" id="name-registrar" placeholder="Nombre Completo" autofocus>
                 </div>
                 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">DPI</label>
-                    <input type="text" class="form-control" id="dpi" placeholder="Ingrese DPI" autofocus>
+                    <input type="text" class="form-control" id="dpi-registrar" placeholder="Ingrese DPI" autofocus>
                 </div>
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Telefono</label>
-                    <input type="number" class="form-control" id="phone" placeholder="Ingrese Telefono" autofocus>
+                    <input type="number" class="form-control" id="phone-registrar" placeholder="Ingrese Telefono" autofocus>
                 </div>
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Ingrese password" autofocus>
+                    <input type="password" class="form-control" id="password-registrar" placeholder="Ingrese password" autofocus>
                 </div>
 
                 <div class="d-grid gap-2"><!--Coloca cada boton a lo largo-->
@@ -114,6 +114,46 @@
         </div>
     </div>
 
+    <div class="container " id="div-administrador" style="display: none;">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 ">
+                <label class="cargar-archivo" >Cargar Archivo</label>
+            </div>
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 ">
+                
+                <input type="file" class="btn btn-danger " id="carga">
+                
+                <!--
+                
+                <input type="file"  class="btn btn-primary " id="carga" >
+                <input type="file"  class="btn btn-success " id ="carga"> 
+                <input type="file" class="btn btn-warning " id ="carga">
+                <input type="file"  class="btn btn-dark " id ="carga">-->
+            </div>
+        </div>
+        
+            
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 ">
+                <p  class="graficas-label">Graficas</p>
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-danger" id="grafica-usuarios">Usuarios</button>
+                    <button class="btn btn-primary " id="grafica-artistas" >Artistas Canciones</button>
+                    <button class="btn btn-success " id ="grafica-musica">Musica Programada</button>
+                    <button class="btn btn-warning " id ="grafica-podcast">Podcast</button>
+                </div>
+
+                     
+            </div>
+            
+            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 py-4 bg-white">
+                <h2>ADMINISTRATOR</h2>
+                <img src="robot.jpg" class="img-thumbnail" alt="...">
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 py-4 "></div>
+        </div>
+    </div>
 
     <script type="text/javascript" src="estructuras.js"></script>
     <script type="text/javascript" src="main.js"></script>
