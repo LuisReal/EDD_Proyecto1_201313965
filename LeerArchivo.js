@@ -1,6 +1,13 @@
 
-lista_usuarios = new Lista();
-lista_artista = new ListaArtista();
+var lista_usuarios = new Lista();
+
+var lista = {
+    nombre: lista_usuarios
+};
+
+localStorage.setItem("usuarios", JSON.stringify(lista));
+
+//var lista_artista = new ListaArtista();
 
 /*
 function readFileUsers(e) { 
@@ -30,7 +37,7 @@ function readFileUsers(e) {
 } 
 document.getElementById('file-input').addEventListener('change', readFileUsers, false);*/
 
-
+/*
 function Users(){
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
@@ -40,9 +47,9 @@ function Users(){
     
 }
 
-//var formulario = document.getElementById('form');
 
-document.getElementById('enviar').addEventListener('click', Users, false);
-//document.getElementById('enviar').addEventListener('click', Users, false);
+
+document.getElementById('enviar').addEventListener('click', Users, false);*/
+
 
 
