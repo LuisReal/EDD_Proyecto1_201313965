@@ -3,6 +3,8 @@ var lista_usuarios = new Lista();
 var lista_artista = new ListaArtista();
 var lista_cancion = new ListaCancion();
 var matriz = new Matriz("Raiz");
+
+
 lista_usuarios.insertar(new Usuario(2654568452521, "Oscar Armin", "EDD", 123, 502123123-4567, true));
 
 var div_login = document.getElementById('div-login');
@@ -75,6 +77,64 @@ function showUser(){
 
     //div_navbar.style.display = "none";
     div_usuario.style.display="block";
+
+    var tabla = document.getElementById('tabla');
+    var tbody = document.createElement('tbody');
+    var artista ="Luis Gonzalez";
+    
+    var contador =0;
+    var fila = document.createElement('tr');
+
+    var temp1 = lista_artista.primero;
+    while(temp1 != null){
+        if(temp1.lista_canciones.primero != null){
+            var temp2 = temp1.lista_canciones.primero;
+            while(temp2 != null){
+                if(contador < 3){
+                    var td = document.createElement('td');
+            
+                    td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+                    <p>`+temp2.cancion.artist+`</p>
+                    <button class="btn btn-danger">Agregar</button>`;
+                    fila.appendChild(td);
+
+                    contador += 1;
+                }else{
+                    tbody.appendChild(fila);
+                    fila = document.createElement('tr');
+                    contador = 0;
+                }
+                temp2 = temp2.siguiente;
+            }
+        }
+        temp1 = temp1.abajo;
+    }
+
+    tabla.appendChild(tbody);
+
+    /*
+    for(var i=0; i<5; i++){
+        var fila = document.createElement('tr');
+        for(var j=0; j<3; j++){
+            
+            var td = document.createElement('td');
+            
+            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+            <p>`+artista+`</p>
+            <button class="btn btn-danger">Agregar</button>`;
+            fila.appendChild(td);
+            
+        }
+        tbody.appendChild(fila);
+    }*/
+    
+    
+    
+    /*
+    for(var i=0; i<5; i++){
+        var p = tabla.getElementsByTagName('p');
+        p.innerHTML=artista;
+    }*/
 }
 
 
@@ -139,6 +199,8 @@ function Users(){
 
 document.getElementById('btn-registrar').addEventListener('click', Users, false);
 
+
+//*****************************LECTURA DE ARCHIVO********************************* */
 function readFile(e) { 
     var file = e.target.files[0];
     var nombre = file.name;
@@ -185,10 +247,14 @@ function readFile(e) {
 } 
 document.getElementById('carga').addEventListener('change', readFile, false);
 
+//*****************************PROGRAMAR CANCION (MATRIZ DISPERZA)********************************* */
 
 function programarCancion(){
     var nombre_cancion = document.getElementById('nombre-cancion');
-    var album_cancion = document.getElementById('album-cancion');
+    var artista_cancion = document.getElementById('artista-cancion');
+    var duracion_cancion = document.getElementById('duracion-cancion');
+    var genero_cancion = document.getElementById('genero-cancion');
+    var cancion = new Cancion(artista_cancion.value, nombre_cancion.value, duracion_cancion.value, genero_cancion.value);//artist, name, duration, gender
 
     var fecha = document.getElementById('fecha').value;
     
@@ -196,17 +262,67 @@ function programarCancion(){
     let date = new Date(fecha);
     
     console.log("mes: "+date.getMonth() + " dia: "+date.getDate());
-    matriz.insertar(new NodoInterno(date.getMonth(), date.getDate(), "cancion1" ));
+    matriz.insertar(new NodoInterno(date.getMonth(), date.getDate(), cancion ));
     
     var nodo = matriz.getNodo(date.getMonth(), date.getDate());
     console.log("mes: "+nodo.x);
-    
+    /*
     if(date1.getMonth() < date2.getMonth()){
         let mes1 = date1.toLocaleString('default', {month:'long'});
         console.log("fecha1 es menor "+ mes1);
     }else{
         let mes2 = date2.toLocaleString('default', {month:'long'});
         console.log("fecha2 es menor "+ mes2);
-    }
+    }*/
 }
 document.getElementById('btn-programar').addEventListener('click', programarCancion, false);
+
+//*****************************PUBLICAR CANCION (LISTA DE LISTAS)********************************* */
+
+function publicarCancion(){
+    var nombre_cancion = document.getElementById('nombre-cancion');
+    var artista_cancion = document.getElementById('artista-cancion');
+    var duracion_cancion = document.getElementById('duracion-cancion');
+    var genero_cancion = document.getElementById('genero-cancion');
+
+    var nodo = lista_artista.getEncabezado(artista_cancion.value);
+
+    if(nodo == null){
+        console.log("No existe el artista");
+    }else{
+        nodo.lista_canciones.insertarCancion(new Cancion(artista_cancion.value, nombre_cancion.value, duracion_cancion.value, genero_cancion.value));
+    }
+
+    lista_artista.mostrarTodo();
+}   
+
+document.getElementById('btn-publicar').addEventListener('click', publicarCancion, false);
+
+
+//*****************************INTERFAZ DE USUARIO********************************* */
+
+var div_musica = document.getElementById('div-musica');
+var div_playlist = document.getElementById('div-playlist');
+
+function showMusica(){
+
+    if(div_playlist.style.display == "block"){
+        div_playlist.style.display = "none";
+    }
+
+    div_musica.style.display = "block";
+}
+
+document.getElementById('usuario-musica').addEventListener('click', showMusica, false);
+
+
+function showPlaylist(){
+
+    if(div_musica.style.display == "block"){
+        div_musica.style.display = "none";
+    }
+
+    div_playlist.style.display = "block";
+}
+
+document.getElementById('usuario-playlist').addEventListener('click', showPlaylist, false);

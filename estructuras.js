@@ -272,7 +272,7 @@ class ListaEncabezado{
 
 
 class NodoInterno{
-    constructor(x , y, valor ){
+    constructor(x , y, valor ){ // valor = new Cancion (artist, name, duration, gender)
         this.valor = valor;
         this.x = x;
         this.y = y;
@@ -458,6 +458,33 @@ class ListaCircularDoble{
                 break;
             }
         }
+    }
+
+    graficar(){
+        var codigodot = "digraph G{\nlabel=\" Lista Circular Doble \";\nnode [shape=box];\n graph [rankdir = LR];";
+        var temporal = this.primero;
+        var conexiones ="";
+        var nodos ="";
+        var numnodo= 0;
+        while (temporal != null) {
+            nodos+=  "N" + numnodo + "[label=\"" + temporal.cancion.name + "\" ];\n"
+            if(temporal.siguiente != null){
+                var auxnum = numnodo+1
+                conexiones += "N" + numnodo + " -> N" + auxnum + ";\n"
+            }
+            temporal = temporal.siguiente
+            numnodo++;            
+        }
+
+        codigodot += "//agregando nodos\n"
+        codigodot += nodos+"\n"
+        codigodot += "//agregando conexiones o flechas\n"
+        codigodot += "{\n"+conexiones+"\n}\n}"
+        console.log(codigodot)
+        d3.select("#lienzo").graphviz()
+            .width(900)
+            .height(500)
+            .renderDot(codigodot)
     }
 }
 
