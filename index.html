@@ -17,7 +17,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar-inicio">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">Muster Cloud</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -51,7 +51,7 @@
                 
                 <div class="mb-3">
                     
-                    <input type="radio" value="administrador" />Administrador<br/>
+                    <input type="radio" value="administrador" id ="boton-radio"/>Administrador<br/>
                 </div>
                 <div class="d-grid gap-2"><!--Coloca cada boton a lo largo-->
                     <button class="btn btn-success" id="enviar-login">SIGN IN</button>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="mb-3 py-4">
                     
-                    <a href="Registrar.html" class="btn btn-primary" target="_blank">Registrarse</a>
+                    <button class="btn btn-primary" id="btn-registrarse">Registrarse</button>
                 </div>
                     
                 
@@ -116,10 +116,10 @@
 
     <div class="container " id="div-administrador" style="display: none;">
         <div class="row">
-            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 ">
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 bg-white">
                 <label class="cargar-archivo" >Cargar Archivo</label>
             </div>
-            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 ">
+            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 py-4 bg-white">
                 
                 <input type="file" class="btn btn-danger " id="carga">
                 
@@ -134,7 +134,7 @@
         
             
         <div class="row">
-            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 ">
+            <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 bg-dark">
                 <p  class="graficas-label">Graficas</p>
                 
                 <div class="d-grid gap-2">
@@ -147,13 +147,62 @@
                      
             </div>
             
-            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 py-4 bg-white">
-                <h2>ADMINISTRATOR</h2>
+            <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 py-4 bg-dark">
+                <h2 class="h-administrador">ADMINISTRATOR</h2>
                 <img src="robot.jpg" class="img-thumbnail" alt="...">
             </div>
             <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 py-4 "></div>
         </div>
     </div>
+
+    <div class="container my-3 " id="div-usuario" style="display: block;">
+        <ul class="nav justify-content-center bg-dark">
+            <li class="nav-item">
+                <button class="boton" id="usuario-musica">Musica</button>
+              </li>
+            <li class="nav-item">
+              <button class="boton" id="usuario-playlist">Playlist</button>
+            </li>
+            <li class="nav-item">
+                <button class="boton" id="usuario-artistas">Artistas</button>
+            </li>
+            <li class="nav-item">
+                <button class="boton" id="usuario-amigos">Amigos</button>
+            </li>
+            <li class="nav-item">
+                <button class="boton" id="usuario-bloqueados">Bloquedos</button>
+            </li>
+        </ul>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label" id="label-publicar-cancion">Publicar Cancion</label>
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre-cancion" placeholder="Nombre" autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Album</label>
+                    <input type="text" class="form-control" id="album-cancion" placeholder="Album" autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="fecha" placeholder="Nombre" autofocus>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success" id="grafica-usuarios">Publicar</button>
+                    <button class="btn btn-success" id="btn-programar">Programar</button>
+                </div>
+                
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4 bg-dark"></div>
+        </div>
+        
+        
+    </div>  
 
     <script type="text/javascript" src="estructuras.js"></script>
     <script type="text/javascript" src="main.js"></script>

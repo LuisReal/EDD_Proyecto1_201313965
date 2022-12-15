@@ -37,6 +37,19 @@ class Lista{
         }
     }
 
+    buscar(username, password){
+        var temp = this.primero;
+
+        while(temp != null){
+            if(temp.usuario.username == username && temp.usuario.password == password){
+                return temp; // encuentra el usuario
+            }
+            temp = temp.siguiente;
+        }
+
+        return null; // no encuentra el usuario
+    }
+
     print(){
         var temp = this.primero;
         console.log("imprimiendo lista de usuarios")
