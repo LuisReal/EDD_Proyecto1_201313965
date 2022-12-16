@@ -157,6 +157,83 @@ class ListaArtista{
         }
         
     }
+
+    graficar(){
+        var codigodot = "digraph G{\nlabel=\" Lista de Listas \";\nnode [shape=box];\n";
+        var temp1 = this.primero;
+        var conexiones ="";
+        var nodos ="";
+        var numnodo= 0;
+        var contador2 = 0;
+        // grafo += '{rank=same;root;'
+        while (temp1 != null) {
+            
+            nodos+=  "NE"+numnodo + "[label=\"" + temp1.artista.name + "\"];\n";
+            
+            if(temp1.lista_canciones.primero != null){
+                var temp2 = temp1.lista_canciones.primero;
+                
+                while(temp2 != null){
+                    nodos+=  "NL"+numnodo+""+contador2 + "[label=\"" + temp2.cancion.name + "\"];\n";
+                    contador2 += 1;
+                    temp2 = temp2.siguiente;
+                }
+                
+                contador2 = 0;
+            }
+            numnodo += 1;
+            temp1 = temp1.abajo;  
+              
+        }
+
+        var tempo = this.primero;
+        numnodo = 0;
+        nodos += "{rank=same ";
+        while(tempo != null){
+            nodos += "NE"+numnodo+";";
+            numnodo += 1;
+            tempo = tempo.abajo;
+        }
+        nodos+= "}\n";
+
+        temp1 = this.primero;
+        numnodo = 0;
+        contador2 = 0;
+        var auxnum2 = 0;
+
+        while (temp1 != null) {
+            
+            
+            conexiones += "NE"+numnodo+ " -> NE" +numnodo+1+ ";\n";
+            
+            if(temp1.lista_canciones.primero != null){
+                var temp2 = temp1.lista_canciones.primero;
+                
+                conexiones += "NE"+numnodo+ " -> NL" +numnodo+""+auxnum2+ ";\n";
+                
+                while(temp2 != null){
+                    conexiones += "NL"+numnodo+""+auxnum2+ " -> NL" +numnodo+""+auxnum2+1+ ";\n";
+                    auxnum2 += 1;
+                    temp2 = temp2.siguiente;
+                }
+            }
+            numnodo += 1;
+            
+            temp1 = temp1.abajo;
+
+        }
+       
+
+        codigodot += "//agregando nodos\n"
+        codigodot += nodos+"\n"
+        codigodot += "//agregando conexiones o flechas\n"
+        codigodot += "{\n"+conexiones+"\n}\n}"
+        console.log(codigodot)
+        d3.select("#lienzo-artistas").graphviz()
+            .width(900)
+            .height(300)
+            .renderDot(codigodot)
+    }
 }
 
 class ListaCancion{

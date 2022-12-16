@@ -321,11 +321,15 @@ document.getElementById('btn-publicar').addEventListener('click', publicarCancio
 
 var div_musica = document.getElementById('div-musica');
 var div_playlist = document.getElementById('div-playlist');
+var div_artista = document.getElementById('div-artista');
+
 
 function showMusica(){
 
     if(div_playlist.style.display == "block"){
         div_playlist.style.display = "none";
+    }else if(div_artista.style.display == "block"){
+        div_artista.style.display = "none";
     }
 
     div_musica.style.display = "block";
@@ -339,6 +343,8 @@ function showPlaylist(){
 
     if(div_musica.style.display == "block"){
         div_musica.style.display = "none";
+    }else if(div_artista.style.display == "block"){
+        div_artista.style.display = "none";
     }
 
     div_playlist.style.display = "block";
@@ -413,3 +419,17 @@ function showPlaylist(){
 }
 
 document.getElementById('usuario-playlist').addEventListener('click', showPlaylist, false);
+
+function showArtista(){
+    if(div_musica.style.display == "block"){
+        div_musica.style.display = "none";
+    }else if(div_playlist.style.display == "block"){
+        div_playlist.style.display = "none";
+    }
+
+    div_artista.style.display = "block";
+
+    lista_artista.graficar();
+}
+
+document.getElementById('usuario-artistas').addEventListener('click', showArtista, false);
