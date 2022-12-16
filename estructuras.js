@@ -483,14 +483,12 @@ class ListaCircularDoble{
         var conexiones ="";
         var nodos ="";
         var numnodo= 0;
+    
+        // grafo += '{rank=same;root;'
         while (temporal != null) {
-            console.log("temporal cancion: "+temporal.cancion.name);
-            nodos+=  "N" + numnodo + "[label=\"" + temporal.cancion.name + "\" ];\n";
-            if(temporal.siguiente != null){
-                var auxnum = numnodo+1;
-                conexiones += "N" + numnodo + " -> N" + auxnum + ";\n";
-                conexiones += "N" +  auxnum + " -> N" + numnodo + ";\n";
-            }
+            
+            nodos+=  "N"+numnodo + "[label=\"" + temporal.cancion.name + "\"];\n";
+            
             temporal = temporal.siguiente;
             numnodo++;  
             if(temporal == this.primero){
@@ -498,6 +496,30 @@ class ListaCircularDoble{
             }
                       
         }
+        
+
+        temporal = this.primero;
+        numnodo = 0;
+        while (temporal != null) {
+            var auxnum = numnodo+1;
+            if(temporal.siguiente != this.primero){
+                conexiones += "N"+numnodo+ " -> N" +auxnum+ ";\n";
+                conexiones += "N"+auxnum+ " -> N" +numnodo+ ";\n";
+            }else{
+                
+                conexiones += "N"+numnodo+ " -> N0;\n";
+                conexiones += "N0 -> N"+numnodo+";\n";
+            }
+            
+            //conexiones += temporal.siguiente.cancion.name+ " -> " +temporal.cancion.name+ ";\n";
+            numnodo++; 
+            temporal = temporal.siguiente;
+
+            if(temporal == this.primero){
+                break;
+            }
+        }
+       
 
         codigodot += "//agregando nodos\n"
         codigodot += nodos+"\n"

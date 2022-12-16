@@ -97,7 +97,7 @@ function showUser(){
                     <p >Cancion: `+temp2.cancion.name+`</p>
                     <p>Artista: `+temp2.cancion.artist+`</p>
                     <button class="btn btn-danger botones" id="`+temp2.cancion.name+`" value="`+temp2.cancion.name+`">Agregar</button>`;
-                    console.log("Agregando la cancion: "+ temp2.cancion.name);
+                    
                     fila.appendChild(td);
 
                     contador += 1;
