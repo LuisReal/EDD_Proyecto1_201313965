@@ -418,7 +418,7 @@ class Cancion{
 class NodoCircular{
     constructor(cancion){
         this.cancion = cancion;
-        this.siguente = null;
+        this.siguiente = null;
         this.anterior = null;
     }
 }
@@ -438,7 +438,7 @@ class ListaCircularDoble{
         }
         else{
             var aux = nuevo_nodo;
-            aux.siguiente = primero;
+            aux.siguiente = this.primero;
             this.primero.anterior = aux;
             this.primero = aux;
         }
@@ -460,6 +460,23 @@ class ListaCircularDoble{
         }
     }
 
+    getCancion(cancion){
+        var temp = this.primero;
+        
+        while(temp != null){
+            if(temp.cancion.name == cancion){
+                return temp;
+            }
+            
+            temp = temp.siguiente;
+            if(temp == this.primero){
+                break;
+            }
+        }
+
+        return null; // si no existe la cancion
+    }
+
     graficar(){
         var codigodot = "digraph G{\nlabel=\" Lista Circular Doble \";\nnode [shape=box];\n graph [rankdir = LR];";
         var temporal = this.primero;
@@ -467,13 +484,19 @@ class ListaCircularDoble{
         var nodos ="";
         var numnodo= 0;
         while (temporal != null) {
-            nodos+=  "N" + numnodo + "[label=\"" + temporal.cancion.name + "\" ];\n"
+            console.log("temporal cancion: "+temporal.cancion.name);
+            nodos+=  "N" + numnodo + "[label=\"" + temporal.cancion.name + "\" ];\n";
             if(temporal.siguiente != null){
-                var auxnum = numnodo+1
-                conexiones += "N" + numnodo + " -> N" + auxnum + ";\n"
+                var auxnum = numnodo+1;
+                conexiones += "N" + numnodo + " -> N" + auxnum + ";\n";
+                conexiones += "N" +  auxnum + " -> N" + numnodo + ";\n";
             }
-            temporal = temporal.siguiente
-            numnodo++;            
+            temporal = temporal.siguiente;
+            numnodo++;  
+            if(temporal == this.primero){
+                break;
+            }
+                      
         }
 
         codigodot += "//agregando nodos\n"
@@ -483,7 +506,7 @@ class ListaCircularDoble{
         console.log(codigodot)
         d3.select("#lienzo").graphviz()
             .width(900)
-            .height(500)
+            .height(300)
             .renderDot(codigodot)
     }
 }

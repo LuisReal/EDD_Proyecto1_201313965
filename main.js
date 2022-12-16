@@ -3,7 +3,7 @@ var lista_usuarios = new Lista();
 var lista_artista = new ListaArtista();
 var lista_cancion = new ListaCancion();
 var matriz = new Matriz("Raiz");
-
+var lista_circular = new ListaCircularDoble();
 
 lista_usuarios.insertar(new Usuario(2654568452521, "Oscar Armin", "EDD", 123, 502123123-4567, true));
 
@@ -92,10 +92,12 @@ function showUser(){
             while(temp2 != null){
                 if(contador < 3){
                     var td = document.createElement('td');
-            
+                    
                     td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
-                    <p>`+temp2.cancion.artist+`</p>
-                    <button class="btn btn-danger">Agregar</button>`;
+                    <p >Cancion: `+temp2.cancion.name+`</p>
+                    <p>Artista: `+temp2.cancion.artist+`</p>
+                    <button class="btn btn-danger botones" id="`+temp2.cancion.name+`" value="`+temp2.cancion.name+`">Agregar</button>`;
+                    console.log("Agregando la cancion: "+ temp2.cancion.name);
                     fila.appendChild(td);
 
                     contador += 1;
@@ -112,30 +114,46 @@ function showUser(){
 
     tabla.appendChild(tbody);
 
-    /*
-    for(var i=0; i<5; i++){
-        var fila = document.createElement('tr');
-        for(var j=0; j<3; j++){
-            
-            var td = document.createElement('td');
-            
-            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
-            <p>`+artista+`</p>
-            <button class="btn btn-danger">Agregar</button>`;
-            fila.appendChild(td);
-            
-        }
-        tbody.appendChild(fila);
-    }*/
-    
-    
-    
-    /*
-    for(var i=0; i<5; i++){
-        var p = tabla.getElementsByTagName('p');
-        p.innerHTML=artista;
-    }*/
+    const botones = document.querySelectorAll(".botones");
+
+    botones.forEach(function(e) {
+	
+        e.addEventListener("click", function(){
+            getCancion(e.id);
+        });
+    });
+ 
 }
+
+
+function getCancion (id) {
+	
+	var atributo = id;
+    var cancion = document.getElementById(atributo).value;
+    //artist, name, duration, gender
+    
+    var temp1 = lista_artista.primero;
+    while(temp1 != null){
+        if(temp1.lista_canciones.primero != null){
+            var temp2 = temp1.lista_canciones.primero;
+            while(temp2 != null){
+                if(temp2.cancion.name == cancion){
+                    lista_circular.insertar(new Cancion(temp2.cancion.artist, temp2.cancion.name, temp2.cancion.duration, temp2.cancion.gender));
+                    break;
+                }
+                temp2 = temp2.siguiente;
+            }  
+        }
+        temp1 = temp1.abajo;
+    }
+    console.log();
+    console.log("Imprimiendo lista circular doble");
+    lista_circular.mostrarLista();
+
+    console.log("El valor del atributo es: "+document.getElementById(atributo).value);
+}
+
+
 
 
 function login(){
@@ -237,7 +255,7 @@ function readFile(e) {
                 
             }
 
-            lista_artista.mostrarTodo();
+            //lista_artista.mostrarTodo();
         }
         
 
@@ -316,6 +334,7 @@ function showMusica(){
 document.getElementById('usuario-musica').addEventListener('click', showMusica, false);
 
 
+
 function showPlaylist(){
 
     if(div_musica.style.display == "block"){
@@ -323,6 +342,74 @@ function showPlaylist(){
     }
 
     div_playlist.style.display = "block";
+
+    lista_circular.graficar();
+    var carrusel = document.getElementById('carrusel');
+    var botones = document.getElementById('botones-carrusel');
+    var temporal = lista_circular.primero;
+
+    /*<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>*/
+    var contador = 0;
+    var cadena = "";
+
+    while (temporal != null) {
+        
+        if(temporal == lista_circular.primero){
+            var div = document.createElement('div');
+            div.setAttribute('class','carousel-item active');
+            div.innerHTML=`
+                       
+                <img src="fondo.jpeg"  class="d-block w-100" alt="...">
+
+                <div class="carousel-caption d-none d-md-block">
+                    <img src="cancion.jpg" width="350" height="300" alt="...">
+                    <h5>Cancion: `+temporal.cancion.name+`</h5>
+                    <p>Artista: `+temporal.cancion.artist+`</p>
+                </div>
+            `;
+            
+            cadena += `<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="`+contador+`" class="active" aria-current="true" aria-label="Slide `+contador+1+`"></button>`;
+            contador += 1;
+            carrusel.appendChild(div);
+            
+
+        }else{
+            var div = document.createElement('div');
+            div.setAttribute('class','carousel-item');
+            div.innerHTML=`              
+                <img src="fondo.jpeg"  class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <img src="cancion.jpg" width="350" height="300" alt="...">
+                    <h5>Cancion: `+temporal.cancion.name+`</h5>
+                    <p>Artista: `+temporal.cancion.artist+`</p>
+                </div>
+            `;
+            cadena += `<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="`+contador+`" aria-label="Slide `+contador+1+`"></button>`
+            contador += 1;
+            carrusel.appendChild(div);
+        }
+
+        temporal = temporal.siguiente;
+        
+        if(temporal == lista_circular.primero){
+            break;
+        }
+                  
+    }
+
+    botones.innerHTML = cadena;
+
+    /*  <img src="fondo.jpeg"  class="d-block w-100" alt="...">
+                        
+        <div class="carousel-caption d-none d-md-block">
+            <img src="cancion.jpg" width="350" height="300" alt="...">
+            <h5>Cancion: Do you really want to hurt me</h5>
+            <p>Artista: Culture Club</p>
+        </div>*/
+
+    
 }
 
 document.getElementById('usuario-playlist').addEventListener('click', showPlaylist, false);
