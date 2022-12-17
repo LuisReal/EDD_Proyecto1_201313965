@@ -659,7 +659,7 @@ class Pila{
 
     apilar(nuevoNodo){
         var new_nodo = new NodoPila(nuevoNodo);
-        if(this.primero.amigo == null){
+        if(this.primero == null){
             this.primero = new_nodo;
             this.ultimo = new_nodo;
         }
@@ -695,7 +695,7 @@ class Pila{
         var nodoAux = this.primero;
         
         var cadena = '';
-        while(True){
+        while(true){
             if(nodoAux != null){
                 cadena += '(' + nodoAux.amigo.name + ') -> ';
                 if(nodoAux.siguiente != null){
@@ -710,6 +710,19 @@ class Pila{
             }
         }
         console.log(cadena);
+    }
+
+    getNodoPila(usuario){
+        var temp = this.primero;
+        
+        while(temp!= null){
+            if(temp.amigo.name == usuario){
+                return temp;
+            }
+            temp = temp.siguiente;
+        }
+
+        return null;
     }
         
 }

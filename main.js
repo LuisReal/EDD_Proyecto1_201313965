@@ -4,6 +4,7 @@ var lista_artista = new ListaArtista();
 var lista_cancion = new ListaCancion();
 var matriz = new Matriz("Raiz");
 var lista_circular = new ListaCircularDoble();
+var pila = new Pila();
 
 lista_usuarios.insertar(new Usuario(2654568452521, "Oscar Armin", "EDD", 123, 502123123-4567, true));
 
@@ -324,6 +325,9 @@ var div_playlist = document.getElementById('div-playlist');
 var div_artista = document.getElementById('div-artista');
 var div_amigos = document.getElementById('div-amigos');
 
+
+
+
 function showMusica(){
 
     if(div_playlist.style.display == "block"){
@@ -443,6 +447,7 @@ function showArtista(){
 document.getElementById('usuario-artistas').addEventListener('click', showArtista, false);
 
 
+
 function showAmigos(){
     if(div_musica.style.display == "block"){
         div_musica.style.display = "none";
@@ -469,7 +474,7 @@ function showAmigos(){
             td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
             <p >Usuario: `+temp.usuario.name+`</p>
             
-            <button class="btn btn-danger botones-usuarios" id="`+temp.usuario.name+`" value="`+temp.usuario.name+`">Agregar</button>`;
+            <button class="btn btn-success botones-usuarios" id="`+temp.usuario.name+`" value="`+temp.usuario.name+`">Agregar</button>`;
             
             fila.appendChild(td);
 
@@ -491,36 +496,86 @@ function showAmigos(){
 	
         e.addEventListener("click", function(){
             getUsuario(e.id);
+            
+            
         });
     });
 }
 
+var tabla_amigos = document.getElementById('tabla-amigos');
+var tbody_amigos = document.createElement('tbody');
+var fila = document.createElement('tr');
+var contador=0;
+var td;
 function getUsuario(id){
     var atributo = id;
     var usuario = document.getElementById(atributo).value;
-    //artist, name, duration, gender
+    console.log("El usuario pulsado es: "+usuario);
+    var nodo_usuario = lista_usuarios.getUsuario(usuario);
     
-    /*
-    var temp1 = lista_artista.primero;
-    while(temp1 != null){
-        if(temp1.lista_canciones.primero != null){
-            var temp2 = temp1.lista_canciones.primero;
-            while(temp2 != null){
-                if(temp2.cancion.name == cancion){
-                    lista_circular.insertar(new Cancion(temp2.cancion.artist, temp2.cancion.name, temp2.cancion.duration, temp2.cancion.gender));
-                    break;
-                }
-                temp2 = temp2.siguiente;
-            }  
-        }
-        temp1 = temp1.abajo;
-    }
-    console.log();
-    console.log("Imprimiendo lista circular doble");
-    lista_circular.mostrarLista();*/
+    pila.apilar(nodo_usuario.usuario);
+    console.log("\n\n");
+    pila.recorrerPila();
 
-    console.log("El nombre del usuario es: "+document.getElementById(atributo).value);
+    if(contador < 3){
+        td = document.createElement('td');
+        
+    }else{
+        
+        fila = document.createElement('tr');
+        td = document.createElement('td');
+        //fila.appendChild(td);
+        //tbody_amigos.appendChild(fila);
+        
+        contador = 0;
+    }
+    console.log("el contador es: "+contador);
+    td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+    <p >Usuario: `+usuario+`</p>
+    <button class="btn btn-danger " id="`+usuario+`" value="`+usuario+`">Bloquear</button>`;
+    fila.appendChild(td);
+    tbody_amigos.appendChild(fila);
+    tabla_amigos.appendChild(tbody_amigos);
+    contador += 1;
 }
     
 
 document.getElementById('usuario-amigos').addEventListener('click', showAmigos, false);
+
+/*
+var tabla_amigos = document.getElementById('tabla-amigos');
+var tbody_amigos = document.createElement('tbody');
+var fila = document.createElement('tr');
+var temp = pila.primero;
+var temp2;
+
+
+function showPila(){
+    
+    while(temp != null){
+        if(contador < 3){
+            var td = document.createElement('td');
+            console.log("el contador es: "+contador);
+            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+            <p >Usuario: `+temp.amigo.name+`</p>
+            
+            <button class="btn btn-danger " id="`+temp.amigo.name+`" value="`+temp.amigo.name+`">Bloquear</button>`;
+            
+            fila.appendChild(td);
+            
+            contador += 1;
+        }else{
+            tbody_amigos.appendChild(fila);
+            fila = document.createElement('tr');
+            contador = 0;
+        }
+        temp2 = temp;
+        temp = temp.siguiente;
+    }
+    temp = temp2;
+    
+    tabla_amigos.appendChild(tbody_amigos);
+    
+}
+
+document.getElementById('mostrar-pila').addEventListener('click', showPila, false);*/
