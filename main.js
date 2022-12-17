@@ -322,7 +322,7 @@ document.getElementById('btn-publicar').addEventListener('click', publicarCancio
 var div_musica = document.getElementById('div-musica');
 var div_playlist = document.getElementById('div-playlist');
 var div_artista = document.getElementById('div-artista');
-
+var div_amigos = document.getElementById('div-amigos');
 
 function showMusica(){
 
@@ -330,7 +330,10 @@ function showMusica(){
         div_playlist.style.display = "none";
     }else if(div_artista.style.display == "block"){
         div_artista.style.display = "none";
+    }else if(div_amigos.style.display == "block"){
+        div_amigos.style.display = "none";
     }
+
 
     div_musica.style.display = "block";
 }
@@ -345,7 +348,10 @@ function showPlaylist(){
         div_musica.style.display = "none";
     }else if(div_artista.style.display == "block"){
         div_artista.style.display = "none";
+    }else if(div_amigos.style.display == "block"){
+        div_amigos.style.display = "none";
     }
+
 
     div_playlist.style.display = "block";
 
@@ -425,6 +431,8 @@ function showArtista(){
         div_musica.style.display = "none";
     }else if(div_playlist.style.display == "block"){
         div_playlist.style.display = "none";
+    }else if(div_amigos.style.display == "block"){
+        div_amigos.style.display = "none";
     }
 
     div_artista.style.display = "block";
@@ -433,3 +441,19 @@ function showArtista(){
 }
 
 document.getElementById('usuario-artistas').addEventListener('click', showArtista, false);
+
+
+function showAmigos(){
+    if(div_musica.style.display == "block"){
+        div_musica.style.display = "none";
+    }else if(div_playlist.style.display == "block"){
+        div_playlist.style.display = "none";
+    }else if(div_artista.style.display == "block"){
+        div_artista.style.display = "none";
+    }
+
+    div_amigos.style.display = "block";
+}
+
+
+document.getElementById('usuario-amigos').addEventListener('click', showAmigos, false);

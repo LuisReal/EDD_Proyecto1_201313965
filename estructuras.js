@@ -168,13 +168,13 @@ class ListaArtista{
         // grafo += '{rank=same;root;'
         while (temp1 != null) {
             
-            nodos+=  "NE"+numnodo + "[label=\"" + temp1.artista.name + "\"];\n";
+            nodos+=  "NE"+numnodo + "[label=\"" + temp1.artista.name + "\", group=\""+numnodo+"\"];\n";
             
             if(temp1.lista_canciones.primero != null){
                 var temp2 = temp1.lista_canciones.primero;
                 
                 while(temp2 != null){
-                    nodos+=  "NL"+numnodo+""+contador2 + "[label=\"" + temp2.cancion.name + "\"];\n";
+                    nodos+=  "NL"+numnodo+""+contador2 + "[label=\"" + temp2.cancion.name + "\", group=\""+numnodo+"\" ];\n";
                     contador2 += 1;
                     temp2 = temp2.siguiente;
                 }
@@ -188,7 +188,7 @@ class ListaArtista{
 
         var tempo = this.primero;
         numnodo = 0;
-        nodos += "{rank=same ";
+        nodos += "{rank=same;";
         while(tempo != null){
             nodos += "NE"+numnodo+";";
             numnodo += 1;
@@ -203,8 +203,10 @@ class ListaArtista{
 
         while (temp1 != null) {
             
+            if(temp1.abajo != null){
+                conexiones += "NE"+numnodo+ " -> NE" +(numnodo+1)+ ";\n";
+            }
             
-            conexiones += "NE"+numnodo+ " -> NE" +numnodo+1+ ";\n";
             
             if(temp1.lista_canciones.primero != null){
                 var temp2 = temp1.lista_canciones.primero;
@@ -212,10 +214,14 @@ class ListaArtista{
                 conexiones += "NE"+numnodo+ " -> NL" +numnodo+""+auxnum2+ ";\n";
                 
                 while(temp2 != null){
-                    conexiones += "NL"+numnodo+""+auxnum2+ " -> NL" +numnodo+""+auxnum2+1+ ";\n";
+                    if(temp2.siguiente != null){
+                        conexiones += "NL"+numnodo+""+auxnum2+ " -> NL" +numnodo+""+(auxnum2+1)+ ";\n";
+                    }
+                    
                     auxnum2 += 1;
                     temp2 = temp2.siguiente;
                 }
+                auxnum2 = 0;
             }
             numnodo += 1;
             
