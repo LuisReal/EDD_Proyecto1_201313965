@@ -236,7 +236,7 @@ function readFile(e) {
                 lista_usuarios.insertar(new Usuario(obj[a].dpi, obj[a].name, obj[a].username, obj[a].password, obj[a].admin) );
             }
     
-            lista_usuarios.print();
+            //lista_usuarios.print();
         }else if(nombre == "artist.json"){
             for(a in obj){
                 
@@ -453,7 +453,74 @@ function showAmigos(){
     }
 
     div_amigos.style.display = "block";
+
+
+    var tabla = document.getElementById('tabla-usuarios');
+    var tbody = document.createElement('tbody');
+    
+    var contador =0;
+    var fila = document.createElement('tr');
+
+    var temp = lista_usuarios.primero;
+    while(temp != null){
+        if(contador < 3){
+            var td = document.createElement('td');
+            
+            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+            <p >Usuario: `+temp.usuario.name+`</p>
+            
+            <button class="btn btn-danger botones-usuarios" id="`+temp.usuario.name+`" value="`+temp.usuario.name+`">Agregar</button>`;
+            
+            fila.appendChild(td);
+
+            contador += 1;
+        }else{
+            tbody.appendChild(fila);
+            fila = document.createElement('tr');
+            contador = 0;
+        }
+
+        temp =temp.siguiente;
+    }
+
+    tabla.appendChild(tbody);
+
+    const botones = document.querySelectorAll(".botones-usuarios");
+
+    botones.forEach(function(e) {
+	
+        e.addEventListener("click", function(){
+            getUsuario(e.id);
+        });
+    });
 }
 
+function getUsuario(id){
+    var atributo = id;
+    var usuario = document.getElementById(atributo).value;
+    //artist, name, duration, gender
+    
+    /*
+    var temp1 = lista_artista.primero;
+    while(temp1 != null){
+        if(temp1.lista_canciones.primero != null){
+            var temp2 = temp1.lista_canciones.primero;
+            while(temp2 != null){
+                if(temp2.cancion.name == cancion){
+                    lista_circular.insertar(new Cancion(temp2.cancion.artist, temp2.cancion.name, temp2.cancion.duration, temp2.cancion.gender));
+                    break;
+                }
+                temp2 = temp2.siguiente;
+            }  
+        }
+        temp1 = temp1.abajo;
+    }
+    console.log();
+    console.log("Imprimiendo lista circular doble");
+    lista_circular.mostrarLista();*/
+
+    console.log("El nombre del usuario es: "+document.getElementById(atributo).value);
+}
+    
 
 document.getElementById('usuario-amigos').addEventListener('click', showAmigos, false);

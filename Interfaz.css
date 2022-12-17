@@ -73,3 +73,9 @@ body{
     font-size: medium;
     text-align: center;
 }
+
+#scroll-table{
+    height: 400px !important;
+    overflow: auto;
+    width: 950px;
+}
