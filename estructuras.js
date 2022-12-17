@@ -50,6 +50,19 @@ class Lista{
         return null; // no encuentra el usuario
     }
 
+    getUsuario(usuario){
+        var temp = this.primero;
+
+        while(temp != null){
+            if(temp.usuario.name == usuario){
+                return temp; // encuentra el usuario
+            }
+            temp = temp.siguiente;
+        }
+
+        return null; // no encuentra el usuario
+    }
+
     print(){
         var temp = this.primero;
         console.log("imprimiendo lista de usuarios")
