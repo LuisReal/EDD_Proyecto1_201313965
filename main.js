@@ -507,6 +507,7 @@ var tbody_amigos = document.createElement('tbody');
 var fila = document.createElement('tr');
 var contador=0;
 var td;
+
 function getUsuario(id){
     var atributo = id;
     var usuario = document.getElementById(atributo).value;
@@ -537,45 +538,10 @@ function getUsuario(id){
     tbody_amigos.appendChild(fila);
     tabla_amigos.appendChild(tbody_amigos);
     contador += 1;
+
+    pila.graficar();
 }
     
 
 document.getElementById('usuario-amigos').addEventListener('click', showAmigos, false);
 
-/*
-var tabla_amigos = document.getElementById('tabla-amigos');
-var tbody_amigos = document.createElement('tbody');
-var fila = document.createElement('tr');
-var temp = pila.primero;
-var temp2;
-
-
-function showPila(){
-    
-    while(temp != null){
-        if(contador < 3){
-            var td = document.createElement('td');
-            console.log("el contador es: "+contador);
-            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
-            <p >Usuario: `+temp.amigo.name+`</p>
-            
-            <button class="btn btn-danger " id="`+temp.amigo.name+`" value="`+temp.amigo.name+`">Bloquear</button>`;
-            
-            fila.appendChild(td);
-            
-            contador += 1;
-        }else{
-            tbody_amigos.appendChild(fila);
-            fila = document.createElement('tr');
-            contador = 0;
-        }
-        temp2 = temp;
-        temp = temp.siguiente;
-    }
-    temp = temp2;
-    
-    tabla_amigos.appendChild(tbody_amigos);
-    
-}
-
-document.getElementById('mostrar-pila').addEventListener('click', showPila, false);*/
