@@ -5,6 +5,7 @@ var lista_cancion = new ListaCancion();
 var matriz = new Matriz("Raiz");
 var lista_circular = new ListaCircularDoble();
 var pila = new Pila();
+var cola = new Cola();
 
 lista_usuarios.insertar(new Usuario(2654568452521, "Oscar Armin", "EDD", 123, 502123123-4567, true));
 
@@ -324,7 +325,7 @@ var div_musica = document.getElementById('div-musica');
 var div_playlist = document.getElementById('div-playlist');
 var div_artista = document.getElementById('div-artista');
 var div_amigos = document.getElementById('div-amigos');
-
+var div_bloqueados = document.getElementById('div-bloqueados');
 
 
 
@@ -533,15 +534,105 @@ function getUsuario(id){
     console.log("el contador es: "+contador);
     td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
     <p >Usuario: `+usuario+`</p>
-    <button class="btn btn-danger " id="`+usuario+`" value="`+usuario+`">Bloquear</button>`;
+    <button class="btn btn-danger btn-bloquear-amigo" id="`+usuario+`" value="`+usuario+`">Bloquear</button>`;
     fila.appendChild(td);
     tbody_amigos.appendChild(fila);
     tabla_amigos.appendChild(tbody_amigos);
     contador += 1;
 
+    
+
     pila.graficar();
+}
+
+const botones = document.querySelectorAll(".btn-bloquear-amigo");
+
+    botones.forEach(function(e) {
+	
+        e.addEventListener("click", function(){
+            bloquearUsuario(e.id);
+            
+            
+        });
+    });
+
+function bloquearUsuario(id){
+    var atributo = id;
+    var usuario = document.getElementById(atributo).value;
+    console.log("\n\n");
+    console.log("bloqueando usuario: "+usuario);
+    console.log("\n\n");
+    var nodo = pila.getNodoPila(usuario);
+
+    cola.insertar(nodo.amigo);
+
+    cola.recorrerCola();
 }
     
 
 document.getElementById('usuario-amigos').addEventListener('click', showAmigos, false);
 
+/*var div_musica = document.getElementById('div-musica');
+
+
+
+var div_bloqueados = document.getElementById('div-bloqueados');*/
+function showBloqueados(){
+
+    if(div_playlist.style.display == "block"){
+        div_playlist.style.display = "none";
+    }else if(div_artista.style.display == "block"){
+        div_artista.style.display = "none";
+    }else if(div_amigos.style.display == "block"){
+        div_amigos.style.display = "none";
+    }else if(div_musica.style.display == "block"){
+        div_musica.style.display = "none";
+    }
+
+
+    div_bloqueados.style.display = "block";
+
+    var tabla = document.getElementById('tabla-bloqueados');
+    var tbody = document.createElement('tbody');
+    
+    var contador =0;
+    var fila = document.createElement('tr');
+
+    var temp = cola.primero;
+    while(temp != null){
+        if(contador < 3){
+            var td = document.createElement('td');
+            
+            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+            <p >Usuario: `+temp.usuario.name+`</p>`;
+            
+            
+            fila.appendChild(td);
+
+            contador += 1;
+        }else{
+            tbody.appendChild(fila);
+            fila = document.createElement('tr');
+            contador = 0;
+        }
+
+        temp =temp.siguiente;
+    }
+
+    tabla.appendChild(tbody);
+
+    
+}
+
+
+document.getElementById('usuario-bloqueados').addEventListener('click', showBloqueados, false);
+
+//***********************************************ELIMINAR AMIGO************************************** */
+
+function eliminarAmigo(){
+    
+    pila.desapilar();
+    pila.graficar();
+}
+
+document.getElementById('eliminar-amigo').addEventListener('click', eliminarAmigo, false);
