@@ -319,7 +319,8 @@ function publicarCancion(){
 document.getElementById('btn-publicar').addEventListener('click', publicarCancion, false);
 
 
-//*****************************INTERFAZ DE USUARIO********************************* */
+//*********************************************INTERFAZ DE USUARIO********************************* */
+//*********************************************INTERFAZ DE USUARIO********************************* */
 
 var div_musica = document.getElementById('div-musica');
 var div_playlist = document.getElementById('div-playlist');
@@ -337,6 +338,8 @@ function showMusica(){
         div_artista.style.display = "none";
     }else if(div_amigos.style.display == "block"){
         div_amigos.style.display = "none";
+    }else if(div_bloqueados.style.display == "block"){
+        div_bloqueados.style.display = "none";
     }
 
 
@@ -355,6 +358,8 @@ function showPlaylist(){
         div_artista.style.display = "none";
     }else if(div_amigos.style.display == "block"){
         div_amigos.style.display = "none";
+    }else if(div_bloqueados.style.display == "block"){
+        div_bloqueados.style.display = "none";
     }
 
 
@@ -438,6 +443,8 @@ function showArtista(){
         div_playlist.style.display = "none";
     }else if(div_amigos.style.display == "block"){
         div_amigos.style.display = "none";
+    }else if(div_bloqueados.style.display == "block"){
+        div_bloqueados.style.display = "none";
     }
 
     div_artista.style.display = "block";
@@ -456,6 +463,8 @@ function showAmigos(){
         div_playlist.style.display = "none";
     }else if(div_artista.style.display == "block"){
         div_artista.style.display = "none";
+    }else if(div_bloqueados.style.display == "block"){
+        div_bloqueados.style.display = "none";
     }
 
     div_amigos.style.display = "block";
