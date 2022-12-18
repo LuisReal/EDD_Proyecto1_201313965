@@ -891,6 +891,49 @@ class Cola{
         }
         console.log(cadena);
     }
+
+    graficar(){
+        var codigodot = "digraph G{\nlabel=\" Pila de Amigos \";\nnode [shape=box];\n graph [rankdir = LR];";
+        var temporal = this.primero;
+        var conexiones ="";
+        var nodos ="";
+        var numnodo= 0;
+    
+        // grafo += '{rank=same;root;'
+        while (temporal != null) {
+            
+            nodos+=  "N"+numnodo + "[label=\"" + temporal.usuario.name + "\"];\n";
+            
+            temporal = temporal.siguiente;
+            numnodo++;  
+                      
+        }
+        
+
+        temporal = this.primero;
+        numnodo = 0;
+        while (temporal != null) {
+            
+            if(temporal.siguiente != null){
+                conexiones += "N"+numnodo+ " -> N" +(numnodo+1)+ ";\n";
+            }
+            
+            numnodo++; 
+            temporal = temporal.siguiente;
+
+        }
+       
+
+        codigodot += "//agregando nodos\n"
+        codigodot += nodos+"\n"
+        codigodot += "//agregando conexiones o flechas\n"
+        codigodot += "{\n"+conexiones+"\n}\n}"
+        console.log(codigodot)
+        d3.select("#lienzo-cola").graphviz()
+            .width(900)
+            .height(300)
+            .renderDot(codigodot)
+    }
 }
 
 /*dpi, name, username, password, phone, admin*/

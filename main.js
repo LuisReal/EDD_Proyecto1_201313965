@@ -498,16 +498,88 @@ function showAmigos(){
         e.addEventListener("click", function(){
             getUsuario(e.id);
             
+        });
+    });
+ 
+}
+
+function showPila(){
+    var tabla = document.getElementById('tabla-amigos');
+    var tbody = document.createElement('tbody');
+    
+    var contador =0;
+    var fila = document.createElement('tr');
+
+    var temp = pila.primero;
+
+    while(temp != null){
+        if(contador < 3){
+            var td = document.createElement('td');
+            
+            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+            <p >Usuario: `+temp.amigo.name+`</p>
+            
+            <button class="btn btn-danger btn-bloquear-amigo" id="`+temp.amigo.name+`" value="`+temp.amigo.name+`">Bloquear</button>`;
+            
+            fila.appendChild(td);
+            tbody.appendChild(fila);
+            contador += 1;
+        }else{
+            
+            fila = document.createElement('tr');
+            var td = document.createElement('td');
+            
+            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+            <p >Usuario: `+temp.amigo.name+`</p>
+            
+            <button class="btn btn-danger btn-bloquear-amigo" id="`+temp.amigo.name+`" value="`+temp.amigo.name+`">Bloquear</button>`;
+            fila.appendChild(td);
+            tbody.appendChild(fila);
+            contador = 0;
+        }
+
+        temp =temp.siguiente;
+    }
+
+    tabla.appendChild(tbody);
+
+    const botones = document.querySelectorAll(".btn-bloquear-amigo");
+
+    botones.forEach(function(e) {
+	
+        e.addEventListener("click", function(){
+            bloquearUsuario(e.id);
             
         });
     });
+
 }
 
+function bloquearUsuario(id){
+    var atributo = id;
+    var usuario = document.getElementById(atributo).value;
+    console.log("\n\n");
+    console.log("bloqueando usuario: "+usuario);
+    console.log("\n\n");
+    var nodo = pila.getNodoPila(usuario);
+
+    cola.insertar(nodo.amigo);
+
+    cola.recorrerCola();
+    cola.graficar();
+}
+    
+
+document.getElementById('show-stack').addEventListener('click', showPila, false);
+
+/*
 var tabla_amigos = document.getElementById('tabla-amigos');
 var tbody_amigos = document.createElement('tbody');
 var fila = document.createElement('tr');
 var contador=0;
 var td;
+var botones_booleano = true;*/
+
 
 function getUsuario(id){
     var atributo = id;
@@ -518,7 +590,8 @@ function getUsuario(id){
     pila.apilar(nodo_usuario.usuario);
     console.log("\n\n");
     pila.recorrerPila();
-
+    pila.graficar();
+    /*
     if(contador < 3){
         td = document.createElement('td');
         
@@ -538,37 +611,19 @@ function getUsuario(id){
     fila.appendChild(td);
     tbody_amigos.appendChild(fila);
     tabla_amigos.appendChild(tbody_amigos);
-    contador += 1;
-
+    
+    
     
 
-    pila.graficar();
-}
+    contador += 1;*/
 
-const botones = document.querySelectorAll(".btn-bloquear-amigo");
 
-    botones.forEach(function(e) {
-	
-        e.addEventListener("click", function(){
-            bloquearUsuario(e.id);
-            
-            
-        });
-    });
-
-function bloquearUsuario(id){
-    var atributo = id;
-    var usuario = document.getElementById(atributo).value;
-    console.log("\n\n");
-    console.log("bloqueando usuario: "+usuario);
-    console.log("\n\n");
-    var nodo = pila.getNodoPila(usuario);
-
-    cola.insertar(nodo.amigo);
-
-    cola.recorrerCola();
-}
     
+}
+
+
+
+
 
 document.getElementById('usuario-amigos').addEventListener('click', showAmigos, false);
 
@@ -608,11 +663,19 @@ function showBloqueados(){
             
             
             fila.appendChild(td);
+            tbody.appendChild(fila);
 
             contador += 1;
         }else{
-            tbody.appendChild(fila);
+            
             fila = document.createElement('tr');
+            var td = document.createElement('td');
+            
+            td.innerHTML =`<img src="musica.png" width=100 height=100 class="img-thumbnail" alt="...">
+            <p >Usuario: `+temp.usuario.name+`</p>`;
+
+            fila.appendChild(fila);
+            tbody.appendChild(fila);
             contador = 0;
         }
 
@@ -627,7 +690,7 @@ function showBloqueados(){
 
 document.getElementById('usuario-bloqueados').addEventListener('click', showBloqueados, false);
 
-//***********************************************ELIMINAR AMIGO************************************** */
+//***********************************************ELIMINAR AMIGO (PILA)************************************** */
 
 function eliminarAmigo(){
     
@@ -636,3 +699,13 @@ function eliminarAmigo(){
 }
 
 document.getElementById('eliminar-amigo').addEventListener('click', eliminarAmigo, false);
+
+//***********************************************ELIMINAR BLOQUEADO (COLA)************************************** */
+
+function eliminarBloqueado(){
+    
+    cola.desencolar();
+    cola.graficar();
+}
+
+document.getElementById('eliminar-bloqueado').addEventListener('click', eliminarBloqueado, false);
