@@ -329,7 +329,8 @@ class ListaCancion{
 //************************************(MATRIZ DISPERZA)*************************************
 
 class NodoEncabezado{
-    constructor(id){
+    constructor(id, mes){
+        this.mes = mes;
         this.id = id; // id = nodoinerno.x   , x = fila
         this.siguiente = null;
         this.anterior = null;
@@ -411,8 +412,9 @@ class ListaEncabezado{
 
 
 class NodoInterno{
-    constructor(x , y, valor ){ // valor = new Cancion (artist, name, duration, gender)
-        this.valor = valor;
+    constructor(x , y, valor, mes ){ // valor = new Cancion (artist, name, duration, gender)
+        this.valor = valor; // contiene un objeto cancion
+        this.mes = mes; // contiene el mes en letras
         this.x = x;
         this.y = y;
         this.arriba = null;
@@ -435,11 +437,11 @@ class Matriz{
         var encabezadoY = this.columnas.getEncabezado(nodoInterno.y);
 
         if(encabezadoX == null){
-            encabezadoX = new NodoEncabezado(nodoInterno.x);
+            encabezadoX = new NodoEncabezado(nodoInterno.x, nodoInterno.mes);
             this.filas.insertarEncabezado(encabezadoX);
         }
         if(encabezadoY == null){
-            encabezadoY = new NodoEncabezado(nodoInterno.y);
+            encabezadoY = new NodoEncabezado(nodoInterno.y, nodoInterno.mes);
             this.columnas.insertarEncabezado(encabezadoY);
         }
         // x = mes     y= dia
@@ -547,7 +549,7 @@ class Matriz{
         // --- lo siguiente es escribir los nodos encabezados, empezamos con las filas, los nodos tendran el foramto Fn
         var x_fila = this.filas.primero
         while(x_fila != null){
-            grafo += "F"+x_fila.id+"[label=\"F"+x_fila.id+"\",fillcolor=\"plum\",group=1];\n";
+            grafo += "F"+x_fila.id+"[label=\""+x_fila.mes+"\",fillcolor=\"plum\",group=1];\n";
             x_fila = x_fila.siguiente;
         }
         // --- apuntamos los nodos F entre ellos

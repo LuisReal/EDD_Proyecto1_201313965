@@ -280,17 +280,27 @@ function programarCancion(){
     
     //let dato = "2022-06-15";
     let date = new Date(fecha);
+    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November','December'];
     
-    console.log("mes: "+date.getMonth() + " dia: "+date.getDate());
-    matriz.insertar(new NodoInterno(date.getMonth(), date.getDate(), cancion ));
+    //console.log("mes: "+date.getMonth() + " dia: "+date.getDate());
+    //var mes = date.toLocaleString('default', {month:'long'});
+    var mes = months[date.getMonth()];
+    console.log("el mes es "+mes);
+    matriz.insertar(new NodoInterno((date.getMonth()+1), (date.getDate()+1), cancion, mes ));
     
     var nodo = matriz.getNodo(date.getMonth(), date.getDate());
     
-    var mes = date.toLocaleString('default', {month:'long'});
+    
     //nodo.x = mes; // asignando mes en letras
-    console.log("mes: "+nodo.x);
+    //console.log("mes: "+nodo.x);
+    nombre_cancion.value="";
+    artista_cancion.value = "";
+    duracion_cancion.value = "";
+    genero_cancion.value = "";
 
     matriz.graficar();
+
+    
     /*
     if(date1.getMonth() < date2.getMonth()){
         let mes1 = date1.toLocaleString('default', {month:'long'});
