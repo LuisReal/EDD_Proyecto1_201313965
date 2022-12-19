@@ -161,7 +161,7 @@
 
     <!--***************************************INTERFAZ DE USUARIO********************************-->
     <!--***************************************INTERFAZ DE USUARIO********************************-->
-    
+
     <div class="container my-3 " id="div-usuario" style="display: block;">
         <ul class="nav justify-content-center bg-dark">
             <li class="nav-item">
@@ -369,8 +369,34 @@
 
         <div class="container my-3 " id="div-podcast" style="display: none;">
             <div class="row" >
-                <div class="btn btn-dark" >Podcast</div>
-                <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 bg-white"></div>
+                <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 py-4">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label" id="label-publicar-cancion">Publicar Cancion</label>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre-podcast" placeholder="Nombre" autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Tema</label>
+                        <input type="text" class="form-control" id="tema-podcast" placeholder="Tema" autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Invitados</label>
+                        <input type="text" class="form-control" id="invitados-podcast" placeholder="invitados" autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Duracion</label>
+                        <input type="text" class="form-control" id="duracion-podcast" placeholder="Duracion" autofocus>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-success" id="btn-publicar-podcast">Publicar</button>
+                        
+                    </div>
+                    
+                </div>
+                
                 <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 py-4 bg-white">
                     
                     <div id="scroll-table">
@@ -384,7 +410,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2 py-4 bg-white"></div>
+                
             </div>
             <div class="row" >
                 <div class="btn btn-dark" >Grafica Arbol Binario Podcast</div>

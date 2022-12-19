@@ -769,6 +769,23 @@ function showPodcast(){
 
 document.getElementById('usuario-podcast').addEventListener('click', showPodcast, false);
 
+
+function publicarPodcast(){
+    var nombre= document.getElementById('nombre-podcast');
+    var tema = document.getElementById('tema-podcast');
+    var invitados = document.getElementById('invitados-podcast');
+    var duracion =  document.getElementById('duracion-podcast');
+
+    arbol.insertar(new podcast(nombre.value, tema.value, invitados.value, duracion.value));
+    arbol.graficar();
+
+    nombre.value = "";
+    tema.value= "";
+    invitados.value = "";
+    duracion.value = "";
+}
+
+document.getElementById('btn-publicar-podcast').addEventListener('click', publicarPodcast, false);
 //***********************************************ELIMINAR AMIGO (PILA)************************************** */
 
 function eliminarAmigo(){

@@ -1180,7 +1180,7 @@ class ABB{
         
         d3.select("#lienzo-arbol").graphviz()
             .width(900)
-            .height(300)
+            .height(500)
             .renderDot(this.codigodot)
     }
     
