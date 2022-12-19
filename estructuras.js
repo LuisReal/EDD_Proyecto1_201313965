@@ -214,6 +214,33 @@ class ListaArtista{
         
     }
 
+    ascendenteBubbleSort(){
+        var aux2 = this.primero;
+
+        while(aux2 !=null){
+            var aux1 = aux2.abajo;
+            while(aux1 != null){
+                if(aux1.artista.name < aux2.artista.name){
+                    var temp = aux2.artista.name;
+
+                    aux2.artista.name = aux1.artista.name;
+                    aux1.artista.name = temp;
+
+                    aux2.siguiente = aux1.siguiente;
+                    aux1.siguiente = aux2.siguiente;
+
+                    
+                }
+                aux1 = aux1.abajo;
+            }
+            aux2 = aux2.abajo;
+        }   
+    }
+
+    descendente(){
+        console.log("descendente")
+    }
+
     graficar(){
         var codigodot = "digraph G{\nlabel=\" Lista de Listas \";\nnode [shape=box];\n";
         var temp1 = this.primero;

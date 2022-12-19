@@ -806,3 +806,16 @@ function eliminarBloqueado(){
 
 document.getElementById('eliminar-bloqueado').addEventListener('click', eliminarBloqueado, false);
 
+//***********************************************ORDEN ASCENDENTE (LISTA DE LISTAS)************************************** */
+function ordenarAscendente(){
+    lista_artista.ascendenteBubbleSort();
+
+    console.log("\n\nMostrando Artistas Ordenados Ascendentemente\n\n");
+    lista_artista.mostrarTodo();
+    lista_artista.graficar();
+}
+
+document.getElementById('btn-ascendente').addEventListener('click', ordenarAscendente, false);
+
+
+//***********************************************ORDEN DESCENDENTE (LISTA DE LISTAS)************************************** */
