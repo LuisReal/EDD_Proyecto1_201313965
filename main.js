@@ -6,6 +6,7 @@ var matriz = new Matriz("Raiz");
 var lista_circular = new ListaCircularDoble();
 var pila = new Pila();
 var cola = new Cola();
+var arbol = new ABB();
 
 lista_usuarios.insertar(new Usuario(2654568452521, "Oscar Armin", "EDD", 123, 502123123-4567, true));
 
@@ -258,6 +259,15 @@ function readFile(e) {
             }
 
             //lista_artista.mostrarTodo();
+        }else if(nombre == "podcast.json"){
+            
+            for(a in obj){
+                arbol.insertar(new podcast(obj[a].name, obj[a].topic, obj[a].duration, obj[a].guests));
+            }
+
+            console.log("\n\nMOSTRANDO ARBOL BINARIO\n\n");
+
+            //arbol.preorden();
         }
         
 
@@ -297,7 +307,7 @@ function programarCancion(){
     artista_cancion.value = "";
     duracion_cancion.value = "";
     genero_cancion.value = "";
-
+    fecha = "";
     matriz.graficar();
 
     
@@ -342,7 +352,7 @@ var div_playlist = document.getElementById('div-playlist');
 var div_artista = document.getElementById('div-artista');
 var div_amigos = document.getElementById('div-amigos');
 var div_bloqueados = document.getElementById('div-bloqueados');
-
+var div_podcast = document.getElementById('div-podcast');
 
 
 function showMusica(){
@@ -355,6 +365,8 @@ function showMusica(){
         div_amigos.style.display = "none";
     }else if(div_bloqueados.style.display == "block"){
         div_bloqueados.style.display = "none";
+    }else if(div_podcast.style.display == "block"){
+        div_podcast.style.display = "none";
     }
 
 
@@ -375,6 +387,8 @@ function showPlaylist(){
         div_amigos.style.display = "none";
     }else if(div_bloqueados.style.display == "block"){
         div_bloqueados.style.display = "none";
+    }else if(div_podcast.style.display == "block"){
+        div_podcast.style.display = "none";
     }
 
 
@@ -460,6 +474,8 @@ function showArtista(){
         div_amigos.style.display = "none";
     }else if(div_bloqueados.style.display == "block"){
         div_bloqueados.style.display = "none";
+    }else if(div_podcast.style.display == "block"){
+        div_podcast.style.display = "none";
     }
 
     div_artista.style.display = "block";
@@ -480,6 +496,8 @@ function showAmigos(){
         div_artista.style.display = "none";
     }else if(div_bloqueados.style.display == "block"){
         div_bloqueados.style.display = "none";
+    }else if(div_podcast.style.display == "block"){
+        div_podcast.style.display = "none";
     }
 
     div_amigos.style.display = "block";
@@ -666,6 +684,8 @@ function showBloqueados(){
         div_amigos.style.display = "none";
     }else if(div_musica.style.display == "block"){
         div_musica.style.display = "none";
+    }else if(div_podcast.style.display == "block"){
+        div_podcast.style.display = "none";
     }
 
 
@@ -714,6 +734,41 @@ function showBloqueados(){
 
 document.getElementById('usuario-bloqueados').addEventListener('click', showBloqueados, false);
 
+
+function showPodcast(){
+
+    if(div_playlist.style.display == "block"){
+        div_playlist.style.display = "none";
+    }else if(div_artista.style.display == "block"){
+        div_artista.style.display = "none";
+    }else if(div_amigos.style.display == "block"){
+        div_amigos.style.display = "none";
+    }else if(div_musica.style.display == "block"){
+        div_musica.style.display = "none";
+    }else if(div_bloqueados.style.display == "block"){
+        div_bloqueados.style.display = "none";
+    }
+
+
+    div_podcast.style.display = "block";
+    //name, topic, duration, guests
+    /*
+    var nombre = "erat eros viverra";
+
+    var cortado = nombre.split(" ");
+    var primera_palabra = cortado[0];
+
+    console.log("primera palabra es: "+primera_palabra);*/
+    /*
+    arbol.insertar(new podcast("in lacus curabitur", "topic1", "duration1","guests1"));
+    arbol.insertar(new podcast("erat eros viverra", "topic2", "duration4","guests1"));
+    arbol.insertar(new podcast("luctus cum", "topic3", "duration4","guests1"));
+    arbol.insertar(new podcast("integer", "topic4", "duration4","guests1"));*/
+    arbol.graficar();
+}
+
+document.getElementById('usuario-podcast').addEventListener('click', showPodcast, false);
+
 //***********************************************ELIMINAR AMIGO (PILA)************************************** */
 
 function eliminarAmigo(){
@@ -733,3 +788,4 @@ function eliminarBloqueado(){
 }
 
 document.getElementById('eliminar-bloqueado').addEventListener('click', eliminarBloqueado, false);
+

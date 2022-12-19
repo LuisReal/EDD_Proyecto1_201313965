@@ -1085,3 +1085,135 @@ cola.insertar(new Usuario(2418456782101, "LuisReal","luis526",123,57594210, fals
 cola.insertar(new Usuario(555164870132, "karla", "karla123",124, 544567891, false));
 cola.insertar(new Usuario(487135791000, "chelsea", "chelsea123",125, 487956511, false));*/
 
+//**********************************************ARBOL BINARIO (PODCAST)************************************** */
+class podcast{
+    constructor(name, topic, duration, guests){
+        this.name = name;
+        this.topic = topic;
+        this.duration = duration;
+        this.guests = guests;
+    }
+}
+
+class NodoArbol{
+    constructor(_valor){
+        this.valor=_valor;
+        this.izquierda = null;
+        this.derecha = null;
+    }
+}
+
+class ABB{
+    constructor(){
+        this.raiz = null;
+        this.codigodot;
+        this.group = 0;
+    }
+    //metodo insertar
+    insertar(_valor){
+        this.raiz = this.agregar(_valor, this.raiz);
+    }
+    //metodo insertar recursivo
+    agregar(_valor, nodo){
+        if(nodo == null){
+            return new NodoArbol(_valor);
+        }else{
+            
+            if(_valor.name > nodo.valor.name){
+                nodo.derecha = this.agregar(_valor, nodo.derecha);
+            }else{
+                nodo.izquierda = this.agregar(_valor, nodo.izquierda);
+            }
+        }
+        return nodo;
+    }
+    
+    //preorden
+    preorden(){
+        this.pre_orden(this.raiz);
+    }
+
+    pre_orden(nodo){
+        if(nodo!=null){
+            console.log("Valor:",nodo.valor.name);
+            this.pre_orden(nodo.izquierda);
+            this.pre_orden(nodo.derecha);
+        }
+    }
+    //inorden
+    inorden(){
+        this.in_orden(this.raiz);
+    }
+    
+    in_orden(nodo){
+        if(nodo!=null){
+            this.in_orden(nodo.izquierda);
+            console.log("Valor:",nodo.valor.name);
+            this.in_orden(nodo.derecha);
+        }
+    }
+
+    //postorden
+    posorden(){
+        this.pos_orden(this.raiz);
+    }
+    
+    pos_orden(nodo){
+        if(nodo!=null){
+            this.pos_orden(nodo.izquierda);
+            this.pos_orden(nodo.derecha);
+            console.log("Valor:",nodo.valor.name);           
+        }
+    }
+
+    graficar(){
+        this.codigodot = "digraph G{\nlabel=\" Arbol Podcast \";\nnode [shape=circle];\n";
+    
+        // grafo += '{rank=same;root;'
+
+        this.recorridoGrafica(this.raiz);
+        this.apuntandoGrafica(this.raiz);
+        
+        this.codigodot += "}";
+
+        console.log(this.codigodot);
+        
+        d3.select("#lienzo-arbol").graphviz()
+            .width(900)
+            .height(300)
+            .renderDot(this.codigodot)
+    }
+    
+    recorridoGrafica(pivote){
+        
+        if(pivote!= null){
+            this.recorridoGrafica(pivote.izquierda);
+            this.codigodot += pivote.valor.name.split(" ")[0] +"[label=\"name: "+pivote.valor.name+"\", group ="+this.group+", fillcolor=\"green\"];\n";
+            this.group += 1;
+            //console.log(this.codigodot);
+            this.recorridoGrafica(pivote.derecha);
+        }
+        return;
+    }
+
+    apuntandoGrafica(pivote){
+        if(pivote!=null){
+            this.apuntandoGrafica(pivote.izquierda);
+            
+            
+            if(pivote.izquierda != null){
+                this.codigodot += pivote.valor.name.split(" ")[0]+"->"+pivote.izquierda.valor.name.split(" ")[0]+";\n";
+                //console.log(this.codigodot);
+            }
+            
+            if(pivote.derecha != null){
+                this.codigodot += pivote.valor.name.split(" ")[0]+"->"+pivote.derecha.valor.name.split(" ")[0]+";\n";
+                //console.log(this.codigodot);
+            }
+            
+            //cout<< pivote->dato<< " ";
+            this.apuntandoGrafica(pivote.derecha);
+        }
+        return;
+    }
+}
