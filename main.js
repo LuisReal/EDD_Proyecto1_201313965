@@ -285,7 +285,12 @@ function programarCancion(){
     matriz.insertar(new NodoInterno(date.getMonth(), date.getDate(), cancion ));
     
     var nodo = matriz.getNodo(date.getMonth(), date.getDate());
+    
+    var mes = date.toLocaleString('default', {month:'long'});
+    //nodo.x = mes; // asignando mes en letras
     console.log("mes: "+nodo.x);
+
+    matriz.graficar();
     /*
     if(date1.getMonth() < date2.getMonth()){
         let mes1 = date1.toLocaleString('default', {month:'long'});

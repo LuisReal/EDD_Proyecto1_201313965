@@ -538,6 +538,145 @@ class Matriz{
                     
         }
     }
+
+    graficar(){
+        var grafo = "digraph T{ \nnode[shape=box fontname=\"Arial\" fillcolor=\"white\" style=filled ]";
+        grafo += "\nroot[label = \""+ this.capa +"\", group=1]\n";
+        grafo += "label = \"MATRIZ DISPERZA\" \nfontname=\"Arial Black\" \nfontsize=\"15pt\" \n\n";
+
+        // --- lo siguiente es escribir los nodos encabezados, empezamos con las filas, los nodos tendran el foramto Fn
+        var x_fila = this.filas.primero
+        while(x_fila != null){
+            grafo += "F"+x_fila.id+"[label=\"F"+x_fila.id+"\",fillcolor=\"plum\",group=1];\n";
+            x_fila = x_fila.siguiente;
+        }
+        // --- apuntamos los nodos F entre ellos
+        var x_fila = this.filas.primero;
+        while (x_fila != null){
+            if (x_fila.siguiente != null){
+                grafo += "F"+x_fila.id+"->F"+x_fila.siguiente.id+";\n";
+                grafo += "F"+x_fila.siguiente.id+"->F"+x_fila.id+";\n";
+            }
+            x_fila = x_fila.siguiente;
+        }
+        // --- Luego de los nodos encabezados fila, seguimos con las columnas, los nodos tendran el foramto Cn
+        var y_columna = this.columnas.primero;
+        while(y_columna != null){
+            var group = y_columna.id+1 ;
+            grafo += "C"+y_columna.id+"[label=\"C"+y_columna.id+"\",fillcolor=\"powderblue\",group="+group+"];\n";
+            y_columna = y_columna.siguiente
+        }
+        // --- apuntamos los nodos C entre ellos
+        var cont = 0
+        y_columna = this.columnas.primero;
+        while(y_columna != null){
+            if(y_columna.siguiente != null){
+                grafo += "C"+y_columna.id+"->C"+y_columna.siguiente.id+"\n";
+                grafo += "C"+y_columna.siguiente.id+"->C"+y_columna.id+"\n";
+            }
+            cont += 1;
+            y_columna = y_columna.siguiente;
+        }
+        // --- luego que hemos escrito todos los nodos encabezado, apuntamos el nodo root hacua ellos 
+        
+        y_columna = this.columnas.primero;
+        x_fila = this.filas.primero ;
+        grafo += "root->F"+x_fila.id+";\n root->C"+y_columna.id+";\n";
+        
+        grafo += "{rank=same;root;";
+        cont = 0;
+
+        y_columna = this.columnas.primero;
+        while(y_columna != null){
+            grafo += "C"+y_columna.id+";";
+            cont += 1;
+            y_columna = y_columna.siguiente;
+        }
+        grafo += '}\n';
+        
+        var aux = this.filas.primero;
+        var aux2 = aux.acceso;
+        cont = 0;
+        while(aux != null){
+            cont += 1;
+            while(aux2 != null){
+                
+                grafo += "N"+aux2.x+"_"+aux2.y+"[label=\""+aux2.valor.name+"\",group="+(aux2.y+1)+", fontcolor=\"white\", fillcolor=\"green\"];\n"
+                //grafo += 'N{}_{}[label="{}",group="{}", fillcolor="dodgerblue"];\n'.format(aux2.x, aux2.y, aux2.caracter, int(aux2.y)+1)
+                
+                aux2 = aux2.derecha;
+            }
+            aux = aux.siguiente;
+            if(aux != null){
+                aux2 = aux.acceso;
+            }
+        }
+
+        aux = this.filas.primero;
+        aux2 = aux.acceso;
+        cont = 0;
+        while(aux != null){
+            var rank = "{rank = same;F"+aux.id+";";
+            cont = 0;
+            while(aux2 != null){
+                if(cont == 0){
+                    grafo += "F"+aux.id+"->N"+aux2.x+"_"+aux2.y+";\n";
+                    grafo += "N"+aux2.x+"_"+aux2.y+"->F"+aux.id+";\n";
+                    cont += 1;
+                }
+                /*
+                if aux2.derecha != None:
+                    grafo += 'N{}_{}->N{}_{};\n'.format(aux2.x, aux2.y, aux2.derecha.x, aux2.derecha.y)
+                    grafo += 'N{}_{}->N{}_{};\n'.format(aux2.derecha.x, aux2.derecha.y, aux2.x, aux2.y)
+                */
+                rank += "N"+aux2.x+"_"+aux2.y+";";
+                aux2 = aux2.derecha;
+            }
+            aux = aux.siguiente;
+            if(aux != null){
+                aux2 = aux.acceso;
+            }
+            grafo += rank+'}\n';
+        }
+
+        aux = this.columnas.primero;
+        aux2 = aux.acceso;
+        cont = 0;
+        while(aux != null){
+            cont = 0;
+            grafo += '';
+            while(aux2 != null){
+                if(cont == 0){
+                    grafo += "C"+aux.id+"->N"+aux2.x+"_"+aux2.y+";\n";
+                    grafo += "N"+aux2.x+"_"+aux2.y+"->C"+aux.id+";\n";
+                    cont += 1;
+                }
+                /*
+                if aux2.abajo != None:
+                    grafo += 'N{}_{}->N{}_{};\n'.format(aux2.abajo.x, aux2.abajo.y, aux2.x, aux2.y)
+                    grafo += 'N{}_{}->N{}_{};\n'.format( aux2.x, aux2.y,aux2.abajo.x, aux2.abajo.y)
+                */
+                aux2 = aux2.abajo;
+            }
+            aux = aux.siguiente;
+
+            if(aux != null){
+                aux2 = aux.acceso;
+            }
+        }
+        grafo += '}';
+
+        grafo += "//agregando nodos\n";
+        
+        grafo += "//agregando conexiones o flechas\n";
+        
+        console.log(grafo)
+        d3.select("#lienzo-matriz").graphviz()
+            .width(900)
+            .height(300)
+            .renderDot(grafo)
+    }
+    
 }
 
 
