@@ -225,9 +225,10 @@ class ListaArtista{
 
                     aux2.artista.name = aux1.artista.name;
                     aux1.artista.name = temp;
-
-                    aux2.siguiente = aux1.siguiente;
-                    aux1.siguiente = aux2.siguiente;
+                    
+                    var lista_canciones = aux2.lista_canciones;
+                    aux2.lista_canciones = aux1.lista_canciones;
+                    aux1.lista_canciones = lista_canciones;
 
                     
                 }
